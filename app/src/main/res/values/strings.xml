@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">EventPlanner</string>
+    <string name="description">Description</string>
+    <string name="headingList">Events this Week:</string>
+    <string name="welcome">Event Planner!</string>
+    <string name="whatlocation">What is your location</string>
+    <string name="townHint">Enter your Town or City</string>
+    <string name="go">Go!</string>
+    <string name="distance">e.g 30</string>
+    <string name="whatDistance">Enter your distance in miles</string>
+    <string name="myEvents">My Events</string>
+    <string name="weather"> Weather Forecast: </string>
+    <string name="title_activity_my_saved_list">MySavedListActivity</string>
+    <string name="title_activity_maps">Map</string>
+    <string-array name="spinnerCategorys">
+        <item>All</item>
+        <item>Art</item>
+        <item>Attractions</item>
+        <item>Food</item>
+        <item>Music</item>
+        <item>Sales</item>
+        <item>Science</item>
+        <item>Sports</item>
+        <item>Technology</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="spinnerTime">
+        <item>Today</item>
+        <item>This Week</item>
+        <item>This Month</item>
+        <item>Next Month</item>
+    </string-array>
+
+</resources>

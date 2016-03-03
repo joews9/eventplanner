@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft = "30dp"
+        android:textColor="#6e2828"
+        android:text="Click an Event on the right to view its details"
+        android:textSize="50sp"
+        android:id="@+id/tvTitle" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft = "30dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:id="@+id/tvLocation"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft = "30dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:id="@+id/tvDate"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvDescription"
+        android:layout_marginBottom="100sp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft = "30dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width ="match_parent"
+        android:layout_weight="0.55"
+        android:layout_marginTop="20sp"
+        android:id="@+id/weatherLayout"
+        android:layout_height="0dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+
+            <ImageView
+                android:layout_width="150sp"
+                android:id="@+id/imgEvent"
+                android:background="@mipmap/eventimage"
+                android:scaleType="centerCrop"
+                android:layout_height="278dp"
+                android:layout_marginLeft="15sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="0.60" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="150sp"
+                android:id="@+id/linearLayout"
+                android:layout_marginLeft="20sp"
+                android:gravity="center"
+                android:layout_alignTop="@+id/imgEvent"
+                android:layout_toLeftOf="@+id/imgWeather"
+                android:layout_toStartOf="@+id/imgWeather">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Weather:"
+                    android:textSize="30sp"
+                    android:id="@+id/weather"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignRight="@+id/tvWeatherType"
+                    android:layout_alignEnd="@+id/tvWeatherType" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvWeatherType"
+                    android:textSize="30sp"
+                    android:text="Not Available"
+                    android:layout_alignTop="@+id/imgWeather"
+                    android:layout_toLeftOf="@+id/imgWeather"
+                    android:layout_toStartOf="@+id/imgWeather" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvTemp"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/tvWeatherType"
+                    android:layout_alignLeft="@+id/tvWeatherType"
+                    android:layout_alignStart="@+id/tvWeatherType" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="102dp"
+                android:id="@+id/imgWeather"
+                android:layout_marginLeft="10sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="0.15" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30sp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="50sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@mipmap/locationmaps"
+            android:id="@+id/btnLocation"/>
+        <Button
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="50sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@mipmap/sharebutton"
+            android:id="@+id/btnShare"/>
+        <Button
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="50sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@mipmap/directionsimage"
+            android:id="@+id/btnDirections"/>
+        <Button
+            android:layout_width="100sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_marginTop="50sp"
+            android:background="@mipmap/ticketlogo"
+            android:id="@+id/btnTickets"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="130sp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@string/go"
+        android:paddingBottom="0dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/eventplannerimage" />
+
+</LinearLayout>

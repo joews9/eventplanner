@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Events: "
+        android:layout_marginTop="20dp"
+        android:textSize="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/listGo"
+        android:layout_weight="1.49"
+        android:layout_marginBottom="10sp"
+        android:layout_height="0dp"></ListView>
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="0dp"
+        android:layout_gravity="bottom"
+        android:contentDescription="@string/go"
+        android:paddingBottom="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/eventplannerimage" />
+
+
+</LinearLayout>
