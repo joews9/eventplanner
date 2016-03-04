@@ -151,6 +151,14 @@
             android:layout_marginLeft="10sp"
             android:layout_marginTop="50sp"
             style="?android:attr/borderlessButtonStyle"
+            android:background="@mipmap/saveicon"
+            android:id="@+id/btnSave"/>
+        <Button
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="50sp"
+            style="?android:attr/borderlessButtonStyle"
             android:background="@mipmap/directionsimage"
             android:id="@+id/btnDirections"/>
         <Button

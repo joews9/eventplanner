@@ -67,6 +67,7 @@ public class SavedEventDetailsFragment extends Fragment implements ServiceListen
     private Thread imageThread;
     View rootView;
     HashMap<String, String> hashmap;
+    private String currentID;
 
     @Nullable
     @Override
@@ -87,11 +88,11 @@ public class SavedEventDetailsFragment extends Fragment implements ServiceListen
             System.out.println(currentEventString);
             try{
                 MySQLiteHelper sqLiteHelper = new MySQLiteHelper(getActivity());
-                String currentID = getArguments().getString("currentID");
+                currentID = getArguments().getString("currentID");
                 hashmap = sqLiteHelper.getChosenEvent(currentID);
-
+                displayEventDetails();
             }catch(Exception e){}
-            displayEventDetails();
+
         }
 
         if (container != null) {
@@ -161,13 +162,12 @@ public class SavedEventDetailsFragment extends Fragment implements ServiceListen
         return rootView;
     }
 
-    /**
-     *
-     * This will update the information from the  listener
-     * @param event
-     */
-    public void updateInfo(JSONObject event){
-        this.event = event;
+    public void updateInfo(String currentID){
+        this.currentID = currentID;
+        MySQLiteHelper sqLiteHelper = new MySQLiteHelper(getActivity());
+        currentID = getArguments().getString("currentID");
+        hashmap = sqLiteHelper.getChosenEvent(currentID);
+        displayEventDetails();
         displayEventDetails();
     }
 

@@ -1,5 +1,6 @@
 package com.event.joe.savedevent;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -21,6 +22,10 @@ import com.event.joe.eventplanner.EventDetailsActivity;
 import com.event.joe.eventplanner.R;
 import com.event.joe.savedlistadapter.SavedListAdapter;
 import com.event.joe.savedlistadapter.SavedListDetailProvider;
+import com.nispok.snackbar.Snackbar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +37,7 @@ public class MySavedEventsFragment extends Fragment {
     private List<String> arrayList;
     private List<String>arrayListDates;
     private List<String>arrayListId;
+    private OnEventSaveSetListener onEventSaveSetListener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.saved_events_layout, container, false);
@@ -51,11 +57,18 @@ public class MySavedEventsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                String currentID =  arrayListId.get(position);
 
-                Intent intent = new Intent(getActivity(), SavedEventDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("currentID", currentID);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    Toast.makeText(getActivity(), currentID , Toast.LENGTH_SHORT).show();
+                    onEventSaveSetListener.setEvent(currentID);
+                }else{
+                    Intent intent = new Intent(getActivity(), SavedEventDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("currentID", currentID);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+
 
             }
         });
@@ -119,6 +132,23 @@ public class MySavedEventsFragment extends Fragment {
                 })
                 .create();
         return myQuittingDialogBox;
+
+    }
+
+    public interface OnEventSaveSetListener{
+
+        public void setEvent(String currentID);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try{
+
+            onEventSaveSetListener = (OnEventSaveSetListener)activity;
+
+        }catch(Exception ex){}
 
     }
 }
