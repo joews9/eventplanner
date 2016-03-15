@@ -34,7 +34,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String POSTCODE = "postcode";
     private static final String ID = "id";
 
-  //  private static final String[] COLUMNS = {KEY_ID,KEY_PC1,KEY_PC2};
+    //  private static final String[] COLUMNS = {KEY_ID,KEY_PC1,KEY_PC2};
 
     private SQLiteDatabase db;
     private String idChosenEvent;
@@ -48,13 +48,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private String ticketURL;
     private JSONObject event;
     private String id;
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_EVENTS_TABLE = "CREATE TABLE table_event ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "latitude TEXT," + "longitude TEXT, " + "date TEXT," + "title TEXT," + "location TEXT," +  "imageURL TEXT," + "postcode TEXT," + "ticketURL TEXT )";
+        String CREATE_EVENTS_TABLE = "CREATE TABLE table_event ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "latitude TEXT," + "longitude TEXT, " + "date TEXT," + "title TEXT," + "location TEXT," + "imageURL TEXT," + "postcode TEXT," + "ticketURL TEXT )";
         db.execSQL(CREATE_EVENTS_TABLE);
 
     }
@@ -66,8 +67,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-
-    public void saveEvent(JSONObject event){
+    public void saveEvent(JSONObject event) {
         this.event = event;
 
         //set the variables from the JSONObject
@@ -98,10 +98,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteEvent(String title){
-        this.title = title;
-        System.out.println("********" + title);
-        String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE title= '" + title +  "'";
+    public void deleteEvent(String eventID) {
+        String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE id= " + eventID;
         db = this.getWritableDatabase();
         db.execSQL(deleteQuery);
 
@@ -112,10 +110,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         int x = 1;
         List<String> List = new ArrayList<String>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT title, date FROM " + TABLE_NAME  + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT title, date FROM " + TABLE_NAME + " ORDER BY id", null);
 
         if (cursor.moveToFirst()) {
-            while (cursor.isAfterLast() == false) {
+            while (!cursor.isAfterLast()) {
                 String title = cursor.getString(cursor.getColumnIndex(TITLE));
 
                 String titleListAdd = title;
@@ -133,7 +131,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         int x = 1;
         List<String> List = new ArrayList<String>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT title, date FROM " + TABLE_NAME  + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT title, date FROM " + TABLE_NAME + " ORDER BY id", null);
 
         if (cursor.moveToFirst()) {
             while (cursor.isAfterLast() == false) {
@@ -149,14 +147,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return List;
     }
 
-    public List<String> getAllEventIDs(){
-        int x =1;
+    public List<String> getAllEventIDs() {
+        int x = 1;
         List<String> list = new ArrayList<String>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT id FROM " + TABLE_NAME  + " ORDER BY id", null);
+        Cursor cursor = db.rawQuery("SELECT id FROM " + TABLE_NAME + " ORDER BY id", null);
 
         if (cursor.moveToFirst()) {
-            while (cursor.isAfterLast() == false) {
+            while (!cursor.isAfterLast()) {
                 String date = cursor.getString(cursor.getColumnIndex(ID));
 
                 String idListAdd = date;
@@ -166,19 +164,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 cursor.moveToNext();
             }
         }
-
         return list;
     }
 
-    public HashMap<String, String> getChosenEvent(String idChosenEvent){
-        HashMap<String, String> chosenEvent = new HashMap<String,String>();
+    public HashMap<String, String> getChosenEvent(String idChosenEvent) {
+        HashMap<String, String> chosenEvent = new HashMap<String, String>();
         this.idChosenEvent = idChosenEvent;
         int x = 1;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT title, date, location, latitude, longitude, imageURL, ticketURL, postcode FROM " + TABLE_NAME + " WHERE id = '" + idChosenEvent + "'", null);
 
         if (cursor.moveToFirst()) {
-            while (cursor.isAfterLast() == false) {
+            while (!cursor.isAfterLast()) {
 
                 String titleEvent = cursor.getString(cursor.getColumnIndex(TITLE));
                 String dateEvent = cursor.getString(cursor.getColumnIndex(DATE));
@@ -205,8 +202,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         return chosenEvent;
     }
-
-
 
 
 }

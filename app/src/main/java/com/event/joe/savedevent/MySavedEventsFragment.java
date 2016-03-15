@@ -22,8 +22,6 @@ import com.event.joe.eventplanner.EventDetailsActivity;
 import com.event.joe.eventplanner.R;
 import com.event.joe.savedlistadapter.SavedListAdapter;
 import com.event.joe.savedlistadapter.SavedListDetailProvider;
-import com.nispok.snackbar.Snackbar;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +36,7 @@ public class MySavedEventsFragment extends Fragment {
     private List<String>arrayListDates;
     private List<String>arrayListId;
     private OnEventSaveSetListener onEventSaveSetListener;
+    String idPosition;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.saved_events_layout, container, false);
@@ -77,7 +76,8 @@ public class MySavedEventsFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                currentTitle = arrayList.get(position);
+                arrayListId = sqLiteHelper.getAllEventIDs();
+                idPosition = arrayListId.get(position);
                 AlertDialog diaBox = AskOption();
                 diaBox.show();
                 return true;
@@ -110,8 +110,7 @@ public class MySavedEventsFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         sqLiteHelper = new MySQLiteHelper(getActivity());
-                        sqLiteHelper.deleteEvent(currentTitle);
-                        System.out.println("********" + currentTitle);
+                        sqLiteHelper.deleteEvent(idPosition);
                         arrayList.clear();
                         arrayListDates.clear();
                         arrayListDates = sqLiteHelper.getAllEventDates();

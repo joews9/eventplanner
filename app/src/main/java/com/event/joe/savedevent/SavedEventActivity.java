@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -13,13 +14,13 @@ import com.event.joe.savedevent.MySavedEventsFragment;
 
 import org.json.JSONObject;
 
-public class SavedEventActivity extends Activity implements MySavedEventsFragment.OnEventSaveSetListener {
+public class SavedEventActivity extends AppCompatActivity implements MySavedEventsFragment.OnEventSaveSetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_event);
-       SavedEventDetailsFragment msef = new SavedEventDetailsFragment();
+       SavedEventDetailsFragment msef;
         MySavedEventsFragment sef = new MySavedEventsFragment();
 
         View myView = findViewById(R.id.saved_event_details_container);
@@ -38,8 +39,6 @@ public class SavedEventActivity extends Activity implements MySavedEventsFragmen
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.saved_event_list_container, sef);
         fragmentTransaction.commit();
-
-
     }
 
 
