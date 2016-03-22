@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,23 +50,121 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private JSONObject event;
     private String id;
 
+    //Login Table
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
+    private static final String PASSWORD = "password";
+    private static final String USERNAME = "username";
+    private static final String FIRSTNAME = "firstName";
+    private static final String LASTNAME = "lastName";
+    private static final String TABLE_LOGIN = "table_login";
+
+   private static final String CREATE_LOGIN_TABLE = "CREATE TABLE table_login ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "username TEXT," + "firstName TEXT, " + "lastName TEXT," + "password TEXT )";
+   private static final String CREATE_EVENTS_TABLE = "CREATE TABLE table_event ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "latitude TEXT," + "longitude TEXT, " + "date TEXT," + "title TEXT," + "location TEXT," + "imageURL TEXT," + "postcode TEXT," + "ticketURL TEXT )";
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_EVENTS_TABLE = "CREATE TABLE table_event ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "latitude TEXT," + "longitude TEXT, " + "date TEXT," + "title TEXT," + "location TEXT," + "imageURL TEXT," + "postcode TEXT," + "ticketURL TEXT )";
+        db.execSQL(CREATE_LOGIN_TABLE);
         db.execSQL(CREATE_EVENTS_TABLE);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXSISTS table_event");
-        this.onCreate(db);
+        db.execSQL("DROP TABLE IF EXSISTS table_login");
+        onCreate(db);
     }
 
+    public boolean CheckIsDataAlreadyInDBorNot(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = null;
+        String Query = "Select * from " + TABLE_LOGIN + " where " + USERNAME + " = '" + username + "'";
+
+        try{
+            cursor = db.rawQuery(Query, null);
+            if(cursor.getCount() <= 0){
+                cursor.close();
+
+            }
+        }catch (Exception e){
+            return false;
+        }
+
+        cursor.close();
+        return true;
+    }
+
+    public String addUser(String username, String password, String firstName, String lastName) {
+
+                    this.username = username;
+                    this.password = password;
+                    this.firstName = firstName;
+                    this.lastName = lastName;
+
+                    db = this.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    values.put(USERNAME, username);
+                    values.put(PASSWORD, password);
+                    values.put(FIRSTNAME, firstName);
+                    values.put(LASTNAME, lastName);
+                    db.insert(TABLE_LOGIN, null, values);
+                    db.close();
+                    return "Account Added";
+                }
+
+    public String getPassword(String currentUsername){
+        String currentPassword = null;
+
+        int x = 1;
+        List<String> List = new ArrayList<String>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT password FROM " + TABLE_LOGIN + " WHERE username = '" + currentUsername + "'", null);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast() == false) {
+                currentPassword = cursor.getString(cursor.getColumnIndex(PASSWORD));
+                x = x + 1;
+                cursor.moveToNext();
+            }
+        }
+
+        return currentPassword;
+    }
+
+    public List<String> getAllUsernames() {
+        int x = 1;
+        List<String> List = new ArrayList<String>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT username FROM " + TABLE_LOGIN, null);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast() == false) {
+                String usernameTemp = cursor.getString(cursor.getColumnIndex(USERNAME));
+            List.add(usernameTemp);
+                x = x + 1;
+                cursor.moveToNext();
+            }
+        }
+        return List;
+    }
+
+
+    public void addInitialUser(){
+        db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USERNAME, "joews9");
+        values.put(FIRSTNAME, "Joe");
+        values.put(PASSWORD, "password123");
+        values.put(LASTNAME, "Millership");
+        db.insert(TABLE_LOGIN, null, values);
+        db.close();
+    }
 
     public void saveEvent(JSONObject event) {
         this.event = event;
@@ -172,7 +271,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         this.idChosenEvent = idChosenEvent;
         int x = 1;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT title, date, location, latitude, longitude, imageURL, ticketURL, postcode FROM " + TABLE_NAME + " WHERE id = '" + idChosenEvent + "'", null);
+        Cursor cursor = db.rawQuery("SELECT " + "title, date, location, latitude, longitude, imageURL, ticketURL, postcode FROM " + TABLE_NAME + " WHERE id = '" + idChosenEvent + "'", null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {

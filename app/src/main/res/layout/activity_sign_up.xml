@@ -15,19 +15,31 @@
         android:layout_marginBottom="24dp"
         android:layout_gravity="center_horizontal" />
 
-    <!--  Email Label -->
+    <EditText android:id="@+id/su_firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#ffffff"
+        android:hint="First Name"
+        android:textColor="#ffffff"
+        android:inputType="text"/>
 
-    <EditText android:id="@+id/input_username"
+    <EditText android:id="@+id/su_lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#ffffff"
+        android:hint="Last Name"
+        android:textColor="#ffffff"
+        android:inputType="text"/>
+
+    <EditText android:id="@+id/su_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="#ffffff"
         android:hint="Username"
         android:textColor="#ffffff"
-        android:inputType="textEmailAddress"/>
+        android:inputType="text"/>
 
-    <!--  Password Label -->
-
-    <EditText android:id="@+id/input_password"
+    <EditText android:id="@+id/su_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -35,20 +47,27 @@
         android:textColorHint="#ffffff"
         android:hint="Password"/>
 
+    <EditText android:id="@+id/su_confirmpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:hint="Confirm Password"/>
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_create"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:text="Login"/>
+        android:text="Create Account"/>
 
-    <TextView android:id="@+id/link_signup"
+    <TextView android:id="@+id/link_login"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="No account yet? Create one"
+        android:text="Aready have an account? Login"
         android:gravity="center"
         android:textColor="#ffffff"
         android:textSize="16dip"/>

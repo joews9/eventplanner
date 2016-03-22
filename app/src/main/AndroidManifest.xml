@@ -56,7 +56,8 @@
             android:exported="true" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name="com.event.joe.savedevent.SavedEventDetailsActivity"></activity>
+        <activity android:name="com.event.joe.savedevent.SavedEventDetailsActivity" />
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>
