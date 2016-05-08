@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical" android:layout_width="match_parent"
-android:layout_height="match_parent">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_marginTop="20dp"
-    android:textSize="30dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginBottom="20dp"
-    android:text="My Events"
-    android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="My Events"
+        android:textColor="#000000"
+        android:layout_height="wrap_content" />
 
-<ListView
-    android:layout_width="match_parent"
-    android:id="@+id/lvMyEvents"
-    android:layout_marginBottom="10sp"
-    android:layout_height="430dp"></ListView>
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/lvMyEvents"
+        android:layout_marginBottom="10sp"
+        android:layout_weight="1"
+        android:layout_height="0dp"></ListView>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:orientation="horizontal" >
-
-</LinearLayout>
-
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="170dp"
-    android:layout_marginBottom="0dp"
-    android:layout_gravity="bottom"
-    android:contentDescription="@string/go"
-    android:paddingBottom="0dp"
-    android:scaleType="centerCrop"
-    android:src="@mipmap/eventplannerimage" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginBottom="0dp"
+        android:layout_gravity="bottom"
+        android:contentDescription="@string/go"
+        android:paddingBottom="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/eventplannerimage" />
 
 
 </LinearLayout>
